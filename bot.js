@@ -9,6 +9,8 @@ const client = new Discord.Client(
     }
 )
 
+let Switch = false
+
 const BOT_PREFIX = "!"
 const EMOTIONS = ['｡:.ﾟヽ(*´∀`)ﾉﾟ.:｡', '(｡◕∀◕｡)','(*ﾟ∀ﾟ*)',
                 '(*´∀`)~♥', 'ヽ(✿ﾟ▽ﾟ)ノ', '( ^ω^)',
@@ -27,22 +29,38 @@ client.on('ready', (msg) => {
 })
 
 client.on('message', (msg) => {
-    if (msg.content.toLowerCase() === 'hi' || msg.content.toLowerCase() === 'hello' ) {
-        msg.reply('Hi there!! (￣▽￣)/')
+    if (msg.content === "BOT-ON"){
+        msg.channel.send('########################')
+        msg.channel.send('### TeamC Mascot IS HERE !!! ###')
+        msg.channel.send('########################')
+        Switch = true
     }
-    else if (msg.content.substr(0,2) === 'ha' || msg.content.substr(0,2) === 'HA') {
-        msg.channel.send('HAHAHAHAHAHAHAHAHA')
+    if (msg.content === "BOT-OFF"){
+        msg.channel.send('#########################')
+        msg.channel.send('### TeamC Mascot IS GONE !!! ###')
+        msg.channel.send('#########################')
+        Switch = false
     }
-    else if (msg.content[0] === BOT_PREFIX) {
-        draw20faces = Math.floor(Math.random() * 20)
-        msg.channel.send(EMOTIONS[draw20faces])
-    }
-    else if (msg.content.toLowerCase() === 'high five' || msg.content.toLowerCase() === 'highfive' ) {
-        draw4highfives = Math.floor(Math.random() * 4)
-        msg.channel.send(HIGHFIVES[draw4highfives])
-    }
-    else if (msg.content.toLowerCase() === 'you are cute' || msg.content.toLowerCase() === 'you are so cute'){
-        msg.reply('I ❤️ you!!!')
+
+
+    if (Switch === true){
+        if (msg.content.toLowerCase() === 'hi' || msg.content.toLowerCase() === 'hello' ) {
+            msg.reply('Hi there!! (￣▽￣)/')
+        }
+        else if (msg.content.substr(0,2) === 'ha') {
+            msg.channel.send('HAHAHAHAHAHAHAHAHA')
+        }
+        else if (msg.content[0] === BOT_PREFIX) {
+            draw20faces = Math.floor(Math.random() * 20)
+            msg.channel.send(EMOTIONS[draw20faces])
+        }
+        else if (msg.content.toLowerCase() === 'high five' || msg.content.toLowerCase() === 'highfive' ) {
+            draw4highfives = Math.floor(Math.random() * 4)
+            msg.channel.send(HIGHFIVES[draw4highfives])
+        }
+        else if (msg.content.toLowerCase() === 'you are cute' || msg.content.toLowerCase() === 'you are so cute'){
+            msg.reply('I ❤️ you!!!')
+        }
     }
 })
 
