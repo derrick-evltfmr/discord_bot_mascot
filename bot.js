@@ -3,7 +3,11 @@
 require('dotenv').config() 
 
 const Discord = require('discord.js')
-const client = new Discord.Client()
+const client = new Discord.Client(
+    {
+        partials: ["MESSAGE"]
+    }
+)
 
 const BOT_PREFIX = "!"
 const EMOTIONS = ['｡:.ﾟヽ(*´∀`)ﾉﾟ.:｡', '(｡◕∀◕｡)','(*ﾟ∀ﾟ*)',
@@ -40,6 +44,10 @@ client.on('message', (msg) => {
     else if (msg.content.toLowerCase() === 'you are cute' || msg.content.toLowerCase() === 'you are so cute'){
         msg.reply('I ❤️ you!!!')
     }
+})
+
+client.on('messageDelete', (msg) => {
+    msg.channel.send("HEY YOU !!! STOP DELETING THE MESSAGES !!!!!!!!!!")
 })
 
 client.login(process.env.BOT_TOKEN)
