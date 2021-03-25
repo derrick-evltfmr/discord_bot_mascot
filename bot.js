@@ -1,6 +1,7 @@
 // it will read in the env files and try to pass all values in env files
 // to process.env
 require('dotenv').config() 
+const fetch = require('node-fetch')
 
 const Discord = require('discord.js')
 const client = new Discord.Client(
