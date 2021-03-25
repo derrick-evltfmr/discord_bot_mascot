@@ -59,25 +59,17 @@ client.on('message', (msg) => {
                 
                     })
                     .then((response) => {
-                        // console.log("RESPONSE:")
-                        // console.log(response)
                         return response.json()
                     })
                     .then((data) => {
-                        console.log("DATA:")
-                        // console.log(data)
-                        console.log(data.sentences[0].tokens)
-                        server_response = data.sentences[0].tokens[0]
-                        console.log(JSON.stringify(server_response))
+
+                        server_response = data.sentences[0].tokens
+
                     })
 
                 await serverPromise
 
                 chatbot_output = JSON.stringify(server_response)
-                console.log("INPUT:")
-                console.log(input)
-                console.log("CHATBOT_OUTPUT:")
-                console.log(chatbot_output)
 
                 msg.channel.send(chatbot_output)
             })();
