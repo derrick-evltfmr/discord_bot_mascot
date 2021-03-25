@@ -39,26 +39,51 @@ client.on('message', (msg) => {
     if (Switch === true){
         let input = msg.content
         let author = msg.author.avatar
-        // let server_response
 
-        // fetch(url, {
-        //     method: 'POST',
-        //     headers: { 
-        //       'Content-Type': 'text/html',
-        //       'Accept': 'text/html'
-        //     },
-        //     body: input
+        var server_response = "not changed"
+
         
-        //     })
-        //     .then((response) => response.json())
-        //     .then((data) => {
-        //         server_response = data.sentences[0].tokens[0]
-        //     });
 
-        // chatbot_output = JSON.stringify(server_response)
+        if (input !== "BOT-ON" && input !== "BOT-OFF" 
+        && author !== "0fbd3bb9697e4346795bd79ea0b46968" ){
 
-        // msg.channel.send(chatbot_output)
-        msg.channel.send(author)
+            (async()=>{
+
+                serverPromise = fetch(url, {
+                    method: 'POST',
+                    headers: { 
+                    'Content-Type': 'text/html',
+                    'Accept': 'text/html'
+                    },
+                    body: input
+                
+                    })
+                    .then((response) => {
+                        // console.log("RESPONSE:")
+                        // console.log(response)
+                        return response.json()
+                    })
+                    .then((data) => {
+                        console.log("DATA:")
+                        // console.log(data)
+                        console.log(data.sentences[0].tokens)
+                        server_response = data.sentences[0].tokens[0]
+                        console.log(JSON.stringify(server_response))
+                    })
+
+                await serverPromise
+
+                chatbot_output = JSON.stringify(server_response)
+                console.log("INPUT:")
+                console.log(input)
+                console.log("CHATBOT_OUTPUT:")
+                console.log(chatbot_output)
+
+                msg.channel.send(chatbot_output)
+            })();
+        
+        }
+
 
     }
 })
