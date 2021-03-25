@@ -38,25 +38,27 @@ client.on('message', (msg) => {
 
     if (Switch === true){
         let input = msg.content
-        let server_response
+        let author = msg.author.avatar
+        // let server_response
 
-        fetch(url, {
-            method: 'POST',
-            headers: { 
-              'Content-Type': 'text/html',
-              'Accept': 'text/html'
-            },
-            body: input
+        // fetch(url, {
+        //     method: 'POST',
+        //     headers: { 
+        //       'Content-Type': 'text/html',
+        //       'Accept': 'text/html'
+        //     },
+        //     body: input
         
-            })
-            .then((response) => response.json())
-            .then((data) => {
-                server_response = data.sentences[0].tokens[0]
-            });
+        //     })
+        //     .then((response) => response.json())
+        //     .then((data) => {
+        //         server_response = data.sentences[0].tokens[0]
+        //     });
 
-        chatbot_output = JSON.stringify(server_response)
+        // chatbot_output = JSON.stringify(server_response)
 
-        msg.channel.send(chatbot_output)
+        // msg.channel.send(chatbot_output)
+        msg.channel.send(author)
 
     }
 })
